@@ -1,0 +1,4 @@
+1. Write out index.html -- button to show tweets from a username -check
+2. Remove "[sot]" from front of each -check
+3. Add an endpoint for doing mashups between two accounts -almost check
+4. Figure out how to clear out the markov chain between runs -check

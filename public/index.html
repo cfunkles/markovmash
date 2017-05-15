@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css" type="text/css">
+	<script
+	  src="http://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	<title>Markov Tweeter</title>
+</head>
+<body>
+	<div class="container text-center center-block">
+		<h1 class="text-primary text-capitalize">Lets make some Markov Tweets!</h1>
+		<h2 class="text-primary text-capitalize">Tweet like one</h2>
+		<div class="well" id="tweet-spot-single"></div>
+		<input type="text" id="input-single" class="form-control text-center" placeholder="Who shall be the one?">
+		<button class="btn btn-lg btn-primary" type="button" id="tweet-single">Make me tweet like somebody 1️⃣</button>
+		<h2 class="text-primary text-capitalize">Now tweet like two</h2>
+		<div class="well" id="tweet-spot-double"></div>
+		<input type="text" id="input-double" class="form-control text-center" placeholder="Who shall be the double one?">
+		<button class="btn btn-lg btn-info"type="button" id="tweet-double">Make me tweet like twobody 2️⃣</button>
+		<div id="error" style="display: none; color: red;">Put in a name foo!</div>
+	</div>
+	<script type="text/javascript">
+		//post request for a single users tweets
+		$('#tweet-single').click(function() {
+			if ($('#input-single').val()) {
+				$('#error').slideUp();
+				$.post('api/tweets/get', {
+					user: $('#input-single').val()
+				}, function(res) {
+					$('#tweet-spot-single').text(res);
+				});
+			} else {
+				$('#error').slideDown();
+			}
+		});
+
+		//post request for tweets from two users
+		$('#tweet-double').click(function() {
+			if ($('#input-double').val()) {
+				$('#error').slideUp();
+				var userArr = $('#input-double').val().split(' ');
+				console.log(userArr);
+				$.post('api/tweets/getTwo', {
+					user1: userArr[0],
+					user2: userArr[1]
+				}, function(res, status) {
+					$('#tweet-spot-double').text(res);
+					$('#tweet-spot-double').text(status);
+				});
+			} else {
+				$('#error').slideDown();
+			}
+		});
+	</script>
+</body>
+</html>
