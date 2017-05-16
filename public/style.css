@@ -1,3 +1,38 @@
 body {
 	background-color: lightblue;
 }
+/*styles the sections around all elements for the single tweeter and double tweeter*/
+div#one-user, div#two-user {
+	border: 1px solid black;
+	border-radius: 50%;
+	margin-bottom: 20px;
+	width: 65%;
+
+}
+/*styles the text in the area the tweet will be added to for each*/
+#tweet-spot-single, #tweet-spot-double {
+	font-family: Helvetica,Arial,sans-serif; 
+	font-size: 14px;
+	line-height: 20px;
+    font-weight: 400;
+    background-color: azure;
+}
+/*styles the general area the tweet will be added to for each*/
+div.well {
+	width: 50%;
+	height: 100px;
+	margin-bottom: 0;
+}
+/*where the text is inputed*/
+input.form-control {
+	width: 25%;
+}
+/*the buttons to post the username to the api endpoint*/
+button.btn-lg {
+	margin-top: 3px;
+	margin-bottom: 25px;
+}
+/*the save buttons*/
+button.btn-sm {
+	margin-bottom: 20px;
+}

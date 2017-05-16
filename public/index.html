@@ -11,16 +11,25 @@
 	<title>Markov Tweeter</title>
 </head>
 <body>
-	<div class="container text-center center-block">
-		<h1 class="text-primary text-capitalize">Lets make some Markov Tweets!</h1>
-		<h2 class="text-primary text-capitalize">Tweet like one</h2>
-		<div class="well" id="tweet-spot-single"></div>
-		<input type="text" id="input-single" class="form-control text-center" placeholder="Who shall be the one?">
-		<button class="btn btn-lg btn-primary" type="button" id="tweet-single">Make me tweet like somebody 1️⃣</button>
-		<h2 class="text-primary text-capitalize">Now tweet like two</h2>
-		<div class="well" id="tweet-spot-double"></div>
-		<input type="text" id="input-double" class="form-control text-center" placeholder="Who shall be the double one?">
-		<button class="btn btn-lg btn-info"type="button" id="tweet-double">Make me tweet like twobody 2️⃣</button>
+	<div class="container-fluid text-center">
+		<h1 class="text-primary text-capitalize">Let's make some Markov Tweets!</h1>
+		<!--one user section -->
+		<div class="container" id="one-user">
+			<h2 class="text-primary text-capitalize">Tweet like one</h2>
+			<div class="well center-block" id="tweet-spot-single"></div>
+			<button class="btn btn-sm btn-warning" id="save-one">If you like it put a save on it!</button>
+			<input type="text" id="input-single" class="form-control text-center center-block" placeholder="Who shall be the one?">
+			<button class="btn btn-lg btn-primary" type="button" id="tweet-single">Make me tweet like the one 1️⃣</button>
+		</div>
+
+		<!-- two users section -->
+		<div class="container" id="two-user">
+			<h2 class="text-primary text-capitalize">Now tweet like two</h2>
+			<div class="well center-block" id="tweet-spot-double"></div>
+			<button class="btn btn-sm btn-warning" id="save-two">If you like it put a save on it!</button>
+			<input type="text" id="input-double" class="form-control text-center center-block" placeholder="Who shall be the double one?">
+			<button class="btn btn-lg btn-info"type="button" id="tweet-double">Make me tweet like the double one 2️⃣</button>
+		</div>
 		<div id="error" style="display: none; color: red;">Put in a name foo!</div>
 	</div>
 	<script type="text/javascript">
@@ -43,18 +52,36 @@
 			if ($('#input-double').val()) {
 				$('#error').slideUp();
 				var userArr = $('#input-double').val().split(' ');
-				console.log(userArr);
 				$.post('api/tweets/getTwo', {
 					user1: userArr[0],
 					user2: userArr[1]
-				}, function(res, status) {
+				}, function(res) {
 					$('#tweet-spot-double').text(res);
-					$('#tweet-spot-double').text(status);
 				});
 			} else {
 				$('#error').slideDown();
 			}
 		});
+		//what to do when clicking the single user save button
+		$('#save-one').click(function() {
+			$.post("api/save/singleTweet", {
+				tweet: $('#tweet-spot-single').text(),
+				user: $('#input-single').val()
+			}, function(res) {
+				alert(res);
+			});
+		});
+		//what to do when clicking the double user save button
+		$('#save-two').click(function() {
+			$.post("api/save/coupleTweet", {
+				tweet: $('#tweet-spot-double').text(),
+				users: $('#input-double').val() 
+			}, function(res) {
+				alert(res);
+			});
+		});
+
+
 	</script>
 </body>
 </html>

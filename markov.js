@@ -68,9 +68,9 @@ var chain = {};
 			return noSOT;
 		}
 
+		//function is called to clear out chain data when node server is running
 		function resetChain() {
 			chain = {};
-			console.log(chain);
 		}
 
 		module.exports = {
