@@ -37,7 +37,7 @@
 		$('#tweet-single').click(function() {
 			if ($('#input-single').val()) {
 				$('#error').slideUp();
-				$.post('api/tweets/get', {
+				$.post('/api/tweets/get', {
 					user: $('#input-single').val()
 				}, function(res) {
 					$('#tweet-spot-single').text(res);
@@ -52,7 +52,7 @@
 			if ($('#input-double').val()) {
 				$('#error').slideUp();
 				var userArr = $('#input-double').val().split(' ');
-				$.post('api/tweets/getTwo', {
+				$.post('/api/tweets/getTwo', {
 					user1: userArr[0],
 					user2: userArr[1]
 				}, function(res) {
@@ -64,7 +64,7 @@
 		});
 		//what to do when clicking the single user save button
 		$('#save-one').click(function() {
-			$.post("api/save/singleTweet", {
+			$.post("/api/save/singleTweet", {
 				tweet: $('#tweet-spot-single').text(),
 				user: $('#input-single').val()
 			}, function(res) {
@@ -73,7 +73,7 @@
 		});
 		//what to do when clicking the double user save button
 		$('#save-two').click(function() {
-			$.post("api/save/coupleTweet", {
+			$.post("/api/save/coupleTweet", {
 				tweet: $('#tweet-spot-double').text(),
 				users: $('#input-double').val() 
 			}, function(res) {

@@ -22,6 +22,7 @@ var chain = {};
 
 		//reads input text, and creates chain object
 		function trainLast(text) {
+			//call this function for the last twitter user to train on.
 			var words = text.split(/[ \n]+/);
 			words.push("[EOT]");//add accryn at end of array meaning end of text
 			words.unshift("[SOT]");//add accryn at beginning of array meaning start of text
@@ -58,6 +59,7 @@ var chain = {};
 		}
 
 		function generate(characterLimit) {
+			//the function wont work unless the trainLast function has been used before this.
 			var currentWord = "sot";//sot never gets placed as secondWord.
 			var output = '';
 			while (currentWord !== "eot" && output.length < characterLimit + 3) {
